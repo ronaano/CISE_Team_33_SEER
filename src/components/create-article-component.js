@@ -72,7 +72,6 @@ export default class CreateArticle extends Component {
             month: this.state.month,
             status: "To be Moderated"
         }
-        console.log("Ronan" + JSON.stringify(article));
         axios.post('http://localhost:5000/articles/add', article)
         .then(res => console.log(res.data));
         
