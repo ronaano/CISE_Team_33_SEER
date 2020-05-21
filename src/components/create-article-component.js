@@ -26,9 +26,7 @@ export default class CreateArticle extends Component {
     }
 
     onChangeAuthor(event) {
-        this.setState({
-            author: event.target.value
-        });
+        this.setState({ author: event.target.value });
     }
 
     onChangeTitle(event) {
