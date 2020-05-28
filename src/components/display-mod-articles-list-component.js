@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 
 const Article = props => {
     <tr>
@@ -12,8 +12,11 @@ const Article = props => {
         <td>{props.articles.number}</td>
         <td>{props.articles.pages}</td>
         <td>{props.articles.month}</td>
+        <td><button onClick={acceptPaper(props.articles._id)} to={"/add/" + props.articles._id}>Accept</button></td>
     </tr>
 }
+
+
 
 export default class ModDisplay extends Component {
     constructor(props) {
@@ -22,6 +25,19 @@ export default class ModDisplay extends Component {
             submittedArticles: []
         };
     };
+
+    acceptPaper(articleID){
+        axios.post("http://localhost:5000/moderatedarticles/add/" + articleID)
+        .then( ) /*pass in the id of the article selected*/
+        /*Change the status of the article to accepted */
+        axios.delete("http://localhost:5000/articles/"+articleID)
+        /*Delete the article and filter submitted articles so it doesn't show the article that has been deleted with that specific id*/
+    }
+
+    /* Reject paper method, button which activates this method. A route representing rejected papers, which only has add and a home route 
+    displaying all the rejected articles.*/
+    /*Change the status of the article to rejected */
+    /*Delete the article and filter submitted articles so it doesn't show the article that has been deleted with that specific id*/
 
     componentDidMount(){
         axios.get("http://localhost:5000/articles")
@@ -55,6 +71,7 @@ export default class ModDisplay extends Component {
                             <th>Number</th>
                             <th>Pages</th>
                             <th>Month</th>
+                            <th>Accept/Reject</th>
                         </tr>
                     </thead>
                     <tbody>

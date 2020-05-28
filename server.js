@@ -21,8 +21,10 @@ conn.once('open', () => {
     console.log("Connection to MongoDB established")
 } )
 
-const articlesRouter = require("./routes/articles.js")
+const articlesRouter = require("./routes/articles.js");
+const moderatedArticlesRouter = require("./routes/moderated-articles.js")
 app.use("/articles", articlesRouter);
+app.use("/moderatedarticles", moderatedArticlesRouter);
 
 app.listen(port, () => {
     console.log("Server is running!");
