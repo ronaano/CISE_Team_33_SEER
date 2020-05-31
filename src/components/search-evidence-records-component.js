@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import FilterGroup from './filtergroup-component';
 
-const filterGroups = [{ id: 1, select1: "", select2: "", select3: "" }];
+// const filterGroups = [{ id: 1}];
 
 export default class SearchEvidenceRecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            counter: 0,
             search: "",
             select1value: '',
             select2value: '',
@@ -78,12 +79,18 @@ export default class SearchEvidenceRecords extends Component {
         });
     }
 
+    addFilter = (event) => {
+        this.setState({
+
+        })
+    }
+
     render() {
 
 
         return (
             <form onSubmit={this.onSubmit}>
-                <div>
+                {/* <div>
                     <select value={this.state.select1value} onChange={this.handleSelect1}>
                         {this.state.filters.map(options => {
                             return <option key={options.key} data-customkey={options.key} value={options.value}>{options.value}</option>
@@ -101,12 +108,19 @@ export default class SearchEvidenceRecords extends Component {
                             return <option key={options} value={options}>{options}</option>;
                         })}
                     </select>
-                </div>
-                {/* <input value={this.state.search}>Description</input>
-                {filterGroups.map((filterGroup) => {
-              //  <FilterGroup key={filterGroup.id} select1={this.state.filters} select2={this.state.operators} select3={} />})
-                } */}
-                <button>+</button>
+                </div> */}
+                {/* <input value={this.state.search}>Description</input> */}
+                <FilterGroup
+                    select1={this.state.filters}
+                    select2={this.state.operators}
+                    select3={this.state.select3dropdown}
+                    select1Change={this.handleSelect1}
+                    select2Change={this.handleSelect2}
+                    select3Change={this.handleSelect3}
+                    selected1={this.state.select1value}
+                    selected2={this.state.select2value}
+                    selected3={this.state.select3value} />
+                <button onClick={this.addFilter}>+</button>
                 <input type="submit" value="Search" onChange={this.onSubmit} />
             </form>
         );
