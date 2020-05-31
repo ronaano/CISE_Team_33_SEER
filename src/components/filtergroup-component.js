@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 export default class FilterGroup extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
-        this.state({
-            select1value: " ",
-            select2value: " ",
-            select3value: " "
-        });
+
     }
-    
+
     render() {
-        (
-        <div>
-            <select>
+        return (
+            <div>
+                {/* <select>
             {this.props.select1.map(options => {
                 return <option key={options.name} value={options.name} /> }
             )}
@@ -27,9 +22,9 @@ export default class FilterGroup extends Component {
             {this.props.select3.map(options3 => {
                 return <option key={options3.name} value={options3.name} /> }
             )}
-            </select>
-        </div>
-        )
+            </select> */}
+            </div>
+        );
     }
 }
 
