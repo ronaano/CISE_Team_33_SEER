@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Table from './table-component.js';
 
-export default class ModDisplay extends Component {
+export default class AnalystDisplay extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            submittedArticles: []
+            moderatedArticles: []
         };
     }
 
     componentDidMount(){
-        axios.get("http://localhost:5000/articles")
+        axios.get("http://localhost:5000/moderated-articles")
             .then(res => {
-                this.setState({submittedArticles: res.data })
+                this.setState({moderatedArticles: res.data })
             })
             .catch((err) => { 
                 console.log(err);
@@ -22,7 +22,7 @@ export default class ModDisplay extends Component {
 
     render(){
         return(
-            <Table submittedArticles = {this.state.submittedArticles}/>
+            <Table submittedArticles = {this.state.moderatedArticles}/>
         )
     }
 }
