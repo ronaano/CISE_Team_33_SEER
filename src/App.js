@@ -7,9 +7,9 @@ import ModDisplay from './components/display-mod-articles-list-component.js';
 function App() {
   return (
     <Router>
-    <div className="container">
+    <div className="container">      
+    <Route path="/" component={ModDisplay}/>      
     <Route path="/create" component={CreateArticle}/>
-    <Route path="/moddisplay" component={ModDisplay}/>
     </div>
     </Router>
   );
