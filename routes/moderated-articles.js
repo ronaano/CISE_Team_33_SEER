@@ -3,7 +3,7 @@ let Article = require('../models/Article.model');
 
 router.route('/').get((req, res) => {
     Article.find()
-        .then(articles => res.json(articles))
+        .then(moderatedarticles => res.json(moderatedarticles))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
