@@ -5,7 +5,23 @@ router.route('/').get((req, res) => {
     Article.find()
         .then(articles => res.json(articles))
         .catch(err => res.status(400).json('Error: ' + err));
-});
+})
+
+router.route('/:_id').get((req, res) => {
+    const id = req.params;
+
+    Article.findById(id)
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/:_id').delete((req, res) => {
+    const id = req.params;
+
+    Article.findByIdAndDelete(id)
+        .then(() => res.json("Article Deleted"))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
 
 router.route('/add').post((req, res) => {
     // console.log("Request: " + JSON.stringify(req.body));
@@ -35,5 +51,6 @@ router.route('/add').post((req, res) => {
         .then(() => res.json('Article added!'))
         .catch(err => { console.log("Err value: " + JSON.stringify(err)); res.status(400).json('Error: ' + err) });
 });
+
 
 module.exports = router;

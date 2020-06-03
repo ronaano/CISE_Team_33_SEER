@@ -23,8 +23,12 @@ conn.once('open', () => {
 })
 
 const articlesRouter = require("./routes/articles.js");
+const moderatedArticlesRouter = require("./routes/moderated-articles.js");
+const rejectedArticlesRouter = require("./routes/rejected-articles.js");
 const evidenceRecordsRouter = require("./routes/evidencerecords.js");
 app.use("/articles", articlesRouter);
+app.use("/moderatedarticles", moderatedArticlesRouter);
+app.use("/rejectedarticles", rejectedArticlesRouter);
 app.use("/evidencerecords", evidenceRecordsRouter);
 
 app.listen(port, () => {
