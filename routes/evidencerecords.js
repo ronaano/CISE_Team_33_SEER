@@ -43,7 +43,7 @@ router.route('/search').post((req, res) => {
                 break;
             }
             default: {
-                break
+                break;
             }
         }
         if (logic === "OR") {
