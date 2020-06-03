@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Article = require('../models/Article.model');
+let Article = require('../models/article.model');
 
 router.route('/').get((req, res) => {
     Article.find()
@@ -8,7 +8,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-   // console.log("Request: " + JSON.stringify(req.body));
+    // console.log("Request: " + JSON.stringify(req.body));
     const author = req.body.author;
     const title = req.body.title;
     const journal = req.body.journal;
@@ -30,10 +30,10 @@ router.route('/add').post((req, res) => {
         month,
         status
     });
-   // console.log("New Article" + JSON.stringify(newArticle));
+    // console.log("New Article" + JSON.stringify(newArticle));
     newArticle.save()
         .then(() => res.json('Article added!'))
-        .catch(err => { console.log("Err value: "+ JSON.stringify(err)); res.status(400).json('Error: ' + err)});
+        .catch(err => { console.log("Err value: " + JSON.stringify(err)); res.status(400).json('Error: ' + err) });
 });
 
 module.exports = router;
