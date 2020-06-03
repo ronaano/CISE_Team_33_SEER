@@ -20,7 +20,7 @@ router.route('/search').post((req, res) => {
         let select3 = filterGroups[i].select3;
         if (i === (filterGroups.length - 1) && i > 1) {
             filterGroups[i].logicoperator = filterGroups[(filterGroups.length - 2)].logicoperator;
-            console.log(filterGroups[i].logicoperator);
+           // console.log(filterGroups[i].logicoperator);
         } switch (select2) {
             case 'is equal to': {
                 queryObject[select1] = select3;
