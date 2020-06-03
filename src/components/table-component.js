@@ -16,9 +16,6 @@ const Article = props => (
     </tr>
 );
 
-//nothing on first click, works on second click
-//subsequent clicks on other articles dont overwrite the previous saved article(shouldnt matter as page should refresh anyway)
-
 export default class Table extends Component {
     constructor(props) {
         super(props);
@@ -73,25 +70,6 @@ export default class Table extends Component {
                 return <Article rejectArticle={() => { this.rejectArticle(currentarticle._id) }} acceptArticle={() => { this.acceptArticle(currentarticle._id) }} typeofdisplay={true} article={currentarticle} key={currentarticle._id} />;
             })
     }
-
-
-
-    // rejectArticle(articleID) {
-    //     let articleSelected = {};
-
-    //     axios.get("http://localhost:5000/articles/" + articleID)
-    //         .then(res => { articleSelected = res.data });
-
-    //     axios.post("http://localhost:5000/rejectedarticles/add/", articleSelected)
-    //         .then(res => console.log(res.data));
-
-    //     axios.delete("http://localhost:5000/articles/" + articleID)
-    //         .then(res => console.log(res.data));
-
-    //     this.setState({ submittedArticles: this.props.submittedArticles.filter(article => this.props.article._id !== articleID) })
-    //     // window.location.reload(false);
-    //     /*Delete the article and filter submitted articles so it doesn't show the article that has been deleted with that specific id*/
-    // }
 
     render() {
         return (
