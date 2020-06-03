@@ -2,7 +2,6 @@ const router = require('express').Router();
 let Article = require('../models/article.model');
 
 router.route('/').get((req, res) => {
-    console.log("bruh / check");
     Article.find()
         .then(articles => res.json(articles))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -17,8 +16,6 @@ router.route('/:_id').get((req, res) => {
 })
 
 router.route('/:_id').delete((req, res) => {
-    //console.log("bruh /:_id delete check");
-
     const id = req.params;
 
     Article.findByIdAndDelete(id)
