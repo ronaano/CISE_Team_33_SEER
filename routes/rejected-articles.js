@@ -7,11 +7,43 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add/:articleId').post((req, res) => {   
-    const newRejectedArticle = Article.find({"_id":req.body._id});
+router.route('/add').post((req, res) => {
+    const Id = req.body._id;
+    const author = req.body.author;
+    const title = req.body.title;
+    const journal = req.body.journal;
+    const year = req.body.year;
+    const volume = req.body.volume;
+    const number = req.body.number;
+    const pages = req.body.pages;
+    const month = req.body.month;
+    const status = req.body.status;
+
+    status = "rejected";
+
+    const newRejectedArticle = new Article({
+        Id,
+        author,
+        title,
+        journal,
+        year,
+        volume,
+        number,
+        pages,
+        month,
+        status
+    });
+
     newRejectedArticle.save()
         .then(() => res.json('Rejected article added!'))
-        .catch(err => { console.log("Err value: "+ JSON.stringify(err)); res.status(400).json('Error: ' + err)});
+        .catch(err => { console.log("Err value: " + JSON.stringify(err)); res.status(400).json('Error: ' + err) });
 });
+
+// router.route('/add/:articleId').post((req, res) => {   
+//     const newRejectedArticle = Article.find({"_id":req.body._id});
+//     newRejectedArticle.save()
+//         .then(() => res.json('Rejected article added!'))
+//         .catch(err => { console.log("Err value: "+ JSON.stringify(err)); res.status(400).json('Error: ' + err)});
+// });
 
 module.exports = router;

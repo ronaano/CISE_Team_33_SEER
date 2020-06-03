@@ -10,19 +10,19 @@ export default class AnalystDisplay extends Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         axios.get("http://localhost:5000/moderated-articles")
             .then(res => {
-                this.setState({moderatedArticles: res.data })
+                this.setState({ moderatedArticles: res.data })
             })
-            .catch((err) => { 
+            .catch((err) => {
                 console.log(err);
             })
     }
 
-    render(){
-        return(
-            <Table submittedArticles = {this.state.moderatedArticles}/>
+    render() {
+        return (
+            <Table type={false} submittedArticles={this.state.moderatedArticles} />
         )
     }
 }
