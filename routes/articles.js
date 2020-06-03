@@ -17,7 +17,7 @@ router.route('/:_id').get((req, res) => {
 })
 
 router.route('/:_id').delete((req, res) => {
-    console.log("bruh /:_id delete check");
+    //console.log("bruh /:_id delete check");
 
     const id = req.params;
 
