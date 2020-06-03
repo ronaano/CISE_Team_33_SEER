@@ -2,15 +2,12 @@ const router = require('express').Router();
 let ModeratedArticle = require('../models/moderatedarticle.model');
 
 router.route('/').get((req, res) => {
-    //console.log("bruh mod / check");
     ModeratedArticle.find()
         .then(moderatedarticles => res.json(moderatedarticles))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-    //console.log("bruh mod /add check");
-
     const _id = req.body._id;
     const author = req.body.author;
     const title = req.body.title;
