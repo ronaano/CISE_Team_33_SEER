@@ -12,7 +12,7 @@ const Article = props => (
         <td>{props.article.number}</td>
         <td>{props.article.pages}</td>
         <td>{props.article.month}</td>
-        <td>{(true ? (<div><button onClick={props.acceptArticle} /></div>) : <button>Analyze</button>)}</td>
+        <td>{(true ? (<div><button onClick={props.acceptArticle} /><button onClick={props.rejectArticle} /></div>) : <button>Analyze</button>)}</td>
     </tr>
 );
 
@@ -46,11 +46,31 @@ export default class Table extends Component {
         window.location = "/mod";
     }
 
+    async rejectArticle(articleID) {
+        console.log("reject check");
+        await axios.get("http://localhost:5000/articles/" + articleID)
+            .then(res => {
+                this.setState({
+                    articleSelected: res.data
+                });
+            });
+
+        axios.post("http://localhost:5000/rejectedarticles/add/", this.state.articleSelected)
+            .then(res => console.log(res.data));
+
+        axios.delete("http://localhost:5000/articles/" + articleID)
+            .then(res => console.log(res.data));
+
+        this.props.articleState(articleID);
+
+        window.location = "/mod";
+    }
+
     articlesList(submittedArticles) {
         console.log(submittedArticles);
         return submittedArticles.map(
             currentarticle => {
-                return <Article acceptArticle={() => { this.acceptArticle(currentarticle._id) }} typeofdisplay={true} article={currentarticle} key={currentarticle._id} />;
+                return <Article rejectArticle={() => { this.rejectArticle(currentarticle._id) }} acceptArticle={() => { this.acceptArticle(currentarticle._id) }} typeofdisplay={true} article={currentarticle} key={currentarticle._id} />;
             })
     }
 

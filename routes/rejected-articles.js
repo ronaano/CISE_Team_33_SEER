@@ -1,14 +1,14 @@
 const router = require('express').Router();
-let Article = require('../models/Article.model');
+let RejectedArticle = require('../models/rejectedarticle.model');
 
 router.route('/').get((req, res) => {
-    Article.find()
+    RejectedArticle.find()
         .then(rejectedarticles => res.json(rejectedarticles))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-    const Id = req.body._id;
+    const _id = req.body._id;
     const author = req.body.author;
     const title = req.body.title;
     const journal = req.body.journal;
@@ -17,12 +17,12 @@ router.route('/add').post((req, res) => {
     const number = req.body.number;
     const pages = req.body.pages;
     const month = req.body.month;
-    const status = req.body.status;
+    let status = req.body.status;
 
     status = "rejected";
 
-    const newRejectedArticle = new Article({
-        Id,
+    const newRejectedArticle = new RejectedArticle({
+        _id,
         author,
         title,
         journal,
@@ -38,12 +38,5 @@ router.route('/add').post((req, res) => {
         .then(() => res.json('Rejected article added!'))
         .catch(err => { console.log("Err value: " + JSON.stringify(err)); res.status(400).json('Error: ' + err) });
 });
-
-// router.route('/add/:articleId').post((req, res) => {   
-//     const newRejectedArticle = Article.find({"_id":req.body._id});
-//     newRejectedArticle.save()
-//         .then(() => res.json('Rejected article added!'))
-//         .catch(err => { console.log("Err value: "+ JSON.stringify(err)); res.status(400).json('Error: ' + err)});
-// });
 
 module.exports = router;
