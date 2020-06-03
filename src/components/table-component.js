@@ -43,7 +43,7 @@ export default class Table extends Component {
 
         this.props.articleState(articleID);
 
-        //window.location = "/mod";
+        window.location = "/mod";
     }
 
     articlesList(submittedArticles) {
