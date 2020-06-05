@@ -7,7 +7,7 @@ export default class SearchEvidenceRecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filterGroups: [{ id: 0, select1: "", select2: "", select3: "", logicoperator: "", logicoperatordropdown: [], select3dropdown: [] }],
+            filterGroups: [{ id: 0, select1: "SoftwareEngineeringMethod", select2: "contains", select3: "TDD", logicoperator: "", logicoperatordropdown: [], select3dropdown: [] }],
             counter: 0,
             search: "",
             filters: [
@@ -27,53 +27,54 @@ export default class SearchEvidenceRecords extends Component {
     }
 
     componentDidMount() {
+        let filterGroupsModified = [...this.state.filterGroups];
+        filterGroupsModified[this.state.counter].select3dropdown = this.state.semethods;
         this.setState({
-            select3dropdown: this.state.semethods
+            filterGroups: filterGroupsModified
         })
     }
 
-
     handleSelect1 = (event, id) => {
-        let key = event.target.value;
+        let select1Value = event.target.value;
         let filterGroupsModified = [...this.state.filterGroups];
-        filterGroupsModified[id].select1 = key;
-        if (key === "SoftwareEngineeringMethod") {
+        filterGroupsModified[id].select1 = select1Value;
+        if (select1Value === "SoftwareEngineeringMethod") {
             filterGroupsModified[id].select3dropdown = this.state.semethods;
-        }
-        else if (key === "Research Method") {
+        } else if (select1Value === "ResearchMethod") {
             filterGroupsModified[id].select3dropdown = this.state.remethod;
-        } else if (key === "Methodology") {
+        } else if (select1Value === "SoftwareEngineeringMethodology") {
             filterGroupsModified[id].select3dropdown = this.state.semethodology;
-        } else if (key === "Participants") {
+        } else if (select1Value === "Participants") {
             filterGroupsModified[id].select3dropdown = this.state.participants;
         }
+        //console.log(JSON.stringify(filterGroupsModified));
         this.setState({
-            filterGroups: filterGroupsModified,
+            filterGroups: filterGroupsModified
         });
     }
 
     handleSelect2 = (event, id) => {
-        let key = event.target.value;
+        let select2value = event.target.value;
         let filterGroupsModified = [...this.state.filterGroups];
-        filterGroupsModified[id].select2 = key;
+        filterGroupsModified[id].select2 = select2value;
         this.setState({
             filterGroups: filterGroupsModified
         });
     }
 
     handleSelect3 = (event, id) => {
-        let key = event.target.value;
+        let select3value = event.target.value;
         let filterGroupsModified = [...this.state.filterGroups];
-        filterGroupsModified[id].select3 = key;
+        filterGroupsModified[id].select3 = select3value;
         this.setState({
             filterGroups: filterGroupsModified
         });
     }
 
     handleLogicOperator = (event, id) => {
-        let key = event.target.value;
+        let logicValue = event.target.value;
         let filterGroupsModified = [...this.state.filterGroups];
-        filterGroupsModified[id].logicoperator = key;
+        filterGroupsModified[id].logicoperator = logicValue;
         this.setState({
             filterGroups: filterGroupsModified
         });
@@ -82,10 +83,9 @@ export default class SearchEvidenceRecords extends Component {
     addFilter = () => {
         let newFilterGroupID = this.state.counter;
         newFilterGroupID++;
-        // console.log("Before adding " + JSON.stringify(this.state.filterGroups));
-        // console.log("Before adding new ID is" + newFilterGroupID);
-        let filterGroupsModified = [...this.state.filterGroups, { id: (newFilterGroupID), select1: "", select2: "", select3: "", select3dropdown: [], logicoperator: "", logicoperatordropdown: [] }];
+        let filterGroupsModified = [...this.state.filterGroups, { id: (newFilterGroupID), select1: "SoftwareEngineeringMethod", select2: "contains", select3: "TDD", select3dropdown: [], logicoperator: "", logicoperatordropdown: [] }];
         filterGroupsModified[this.state.counter].logicoperatordropdown = this.state.logicoperators;
+        filterGroupsModified[this.state.counter].logicoperator = "AND";
         filterGroupsModified[newFilterGroupID].select3dropdown = this.state.semethods;
         this.setState({
             counter: newFilterGroupID,
@@ -94,7 +94,6 @@ export default class SearchEvidenceRecords extends Component {
     }
 
     removeFilter = () => {
-        console.log("Before removing " + JSON.stringify(this.state.filterGroups));
         if (this.state.counter !== 0) {
             let currentlastFilterGroupID = this.state.counter;
             let lastFilterGroupID = this.state.counter;
@@ -108,8 +107,6 @@ export default class SearchEvidenceRecords extends Component {
                 filterGroups: filterGroupsModified
             });
         }
-        // console.log("After removing the counter is" + this.state.counter);
-        // console.log("After removing " + JSON.stringify(this.state.filterGroups));
     }
 
 
@@ -121,7 +118,6 @@ export default class SearchEvidenceRecords extends Component {
                 results: response.data
             });
         }).catch(err => console.log(err));
-        console.log(JSON.stringify(this.state.results));
     }
 
 
@@ -148,9 +144,9 @@ export default class SearchEvidenceRecords extends Component {
                     />);
                 }
                 )}
-                <button onClick={this.addFilter}>+</button>
+                <button type="button" onClick={this.addFilter}>+</button>
                 <br />
-                <button onClick={this.removeFilter}>-</button>
+                <button type="button" onClick={this.removeFilter}>-</button>
                 <br />
                 <input type="submit" value="Search" onChange={this.onSubmit} />
                 <br />
@@ -184,7 +180,6 @@ export default class SearchEvidenceRecords extends Component {
                         })}
                     </tbody>
                 </table>
-
             </form>
         );
     }

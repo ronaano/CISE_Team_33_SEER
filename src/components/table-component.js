@@ -12,7 +12,7 @@ const Article = props => (
         <td>{props.article.number}</td>
         <td>{props.article.pages}</td>
         <td>{props.article.month}</td>
-        <td>{(true ? (<div><button onClick={props.acceptArticle} /><button onClick={props.rejectArticle} /></div>) : <button>Analyze</button>)}</td>
+        <td>{(props.article.type ? (<div><button onClick={props.acceptArticle}>Accept</button><button onClick={props.rejectArticle}>Reject</button></div>) : <button>Analyze</button>)}</td>
     </tr>
 );
 
@@ -67,7 +67,7 @@ export default class Table extends Component {
         console.log(submittedArticles);
         return submittedArticles.map(
             currentarticle => {
-                return <Article rejectArticle={() => { this.rejectArticle(currentarticle._id) }} acceptArticle={() => { this.acceptArticle(currentarticle._id) }} typeofdisplay={true} article={currentarticle} key={currentarticle._id} />;
+                return <Article type={this.props.type} rejectArticle={() => { this.rejectArticle(currentarticle._id) }} acceptArticle={() => { this.acceptArticle(currentarticle._id) }} typeofdisplay={true} article={currentarticle} key={currentarticle._id} />;
             })
     }
 

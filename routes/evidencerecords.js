@@ -18,28 +18,27 @@ router.route('/search').post((req, res) => {
         let select1 = filterGroups[i].select1;
         let select2 = filterGroups[i].select2;
         let select3 = filterGroups[i].select3;
-        if (i === (filterGroups.length - 1) && i > 1) {
+        if (i === (filterGroups.length - 1) && filterGroups.length > 1) {
             filterGroups[i].logicoperator = filterGroups[(filterGroups.length - 2)].logicoperator;
-           // console.log(filterGroups[i].logicoperator);
         } switch (select2) {
             case 'is equal to': {
                 queryObject[select1] = select3;
                 break;
             }
             case 'contains': {
-                queryObject[select1] = { $regex: "/" + select3 + "/" }
+                queryObject[select1] = { $regex: select3 }
                 break;
             }
             case 'does not contain': {
-                queryObject[select1] = { $regex: "/^((?!" + select3 + ").)*$/" }
+                queryObject[select1] = { $regex: "^((?!" + select3 + ").)*$" }
                 break;
             }
             case 'begins with': {
-                queryObject[select1] = { $regex: "/^" + select3 + "/" }
+                queryObject[select1] = { $regex: "^" + select3 }
                 break;
             }
             case 'ends with': {
-                queryObject[select1] = { $regex: "/" + select3 + "$/" }
+                queryObject[select1] = { $regex: select3 + "$" }
                 break;
             }
             default: {
