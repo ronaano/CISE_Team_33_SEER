@@ -71,8 +71,9 @@ export default class CreateArticle extends Component {
             status: "To be Moderated"
         }
         axios.post('http://localhost:5000/articles/add', article)
-        .then(res => console.log(res.data));
-        
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
+
     }
 
     render() {
