@@ -47,7 +47,7 @@ const evidenceRecordSchema = new Schema({
         type: String,
         trim: true
     },
-    SoftwareEngineeringMethod: {
+    SoftwareEngineeringMethodology: {
         type: String,
         trim: true
     }
