@@ -49,7 +49,10 @@ router.route('/add').post((req, res) => {
     // console.log("New Article" + JSON.stringify(newArticle));
     newArticle.save()
         .then(() => res.json('Article added!'))
-        .catch(err => { console.log("Err value: " + JSON.stringify(err)); res.status(400).json('Error: ' + err) });
+        .catch(err => {
+            console.log("Err value: " + JSON.stringify(err));
+            res.status(400).json('Error: ' + err)
+        });
 });
 
 

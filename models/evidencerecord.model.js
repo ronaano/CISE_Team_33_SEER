@@ -12,8 +12,14 @@ const evidenceRecordSchema = new Schema({
         trim: true,
         unique: true
     },
-    Date: {
-        type: Date
+    Month: {
+        type: String,
+        trim: true,
+        maxlength: 3
+    },
+    Year: {
+        type: Number,
+        maxlength: 4
     },
     Description: {
         type: String,
@@ -29,7 +35,7 @@ const evidenceRecordSchema = new Schema({
     Outcome: {
         type: String,
         trim: true,
-        maxlength: 3
+        reqiured: true
     },
     Context: {
         type: String,

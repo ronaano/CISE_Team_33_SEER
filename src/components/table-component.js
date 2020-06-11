@@ -12,7 +12,14 @@ const Article = props => (
         <td>{props.article.number}</td>
         <td>{props.article.pages}</td>
         <td>{props.article.month}</td>
-        <td>{(props.article.type ? (<div><button onClick={props.acceptArticle}>Accept</button><button onClick={props.rejectArticle}>Reject</button></div>) : <button>Analyze</button>)}</td>
+        <td>{(false ? (<div>
+            <button
+                onClick={props.acceptArticle}>Accept</button>
+            <button
+                onClick={props.rejectArticle}>Reject</button>
+        </div>) :
+            (<Link to={"/createevidencerecord/" + props.article._id}>Analyze
+            </Link>))}</td>
     </tr>
 );
 
@@ -32,7 +39,8 @@ export default class Table extends Component {
                 });
             });
 
-        axios.post("http://localhost:5000/moderatedarticles/add/", this.state.articleSelected)
+        axios.post("http://localhost:5000/moderatedarticles/add/",
+            this.state.articleSelected)
             .then(res => console.log(res.data));
 
         axios.delete("http://localhost:5000/articles/" + articleID)
@@ -52,7 +60,8 @@ export default class Table extends Component {
                 });
             });
 
-        axios.post("http://localhost:5000/rejectedarticles/add/", this.state.articleSelected)
+        axios.post("http://localhost:5000/rejectedarticles/add/",
+            this.state.articleSelected)
             .then(res => console.log(res.data));
 
         axios.delete("http://localhost:5000/articles/" + articleID)
@@ -67,7 +76,17 @@ export default class Table extends Component {
         console.log(submittedArticles);
         return submittedArticles.map(
             currentarticle => {
-                return <Article type={this.props.type} rejectArticle={() => { this.rejectArticle(currentarticle._id) }} acceptArticle={() => { this.acceptArticle(currentarticle._id) }} typeofdisplay={true} article={currentarticle} key={currentarticle._id} />;
+                return <Article type={this.props.type}
+                    rejectArticle={() => {
+                        this.rejectArticle(currentarticle._id)
+                    }}
+                    acceptArticle={() => {
+                        this.acceptArticle(currentarticle._id)
+                    }}
+                    typeofdisplay={true}
+                    article={currentarticle}
+                    key={currentarticle._id}
+                    _id={currentarticle._id} />;
             })
     }
 
@@ -85,7 +104,8 @@ export default class Table extends Component {
                             <th>Number</th>
                             <th>Pages</th>
                             <th>Month</th>
-                            <th>{(this.props.type ? "Accept/Reject" : "Analyse")}</th>
+                            <th>{(this.props.type ? "Accept/Reject" :
+                                "Analyse")}</th>
                         </tr>
                     </thead>
                     <tbody>

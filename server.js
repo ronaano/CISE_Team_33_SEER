@@ -31,6 +31,13 @@ app.use("/moderatedarticles", moderatedArticlesRouter);
 app.use("/rejectedarticles", rejectedArticlesRouter);
 app.use("/evidencerecords", evidenceRecordsRouter);
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static('/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve('/build', 'index.html'));
+    });
+}
 app.listen(port, () => {
     console.log("Server is running!");
 })

@@ -36,7 +36,10 @@ router.route('/add').post((req, res) => {
 
     newRejectedArticle.save()
         .then(() => res.json('Rejected article added!'))
-        .catch(err => { console.log("Err value: " + JSON.stringify(err)); res.status(400).json('Error: ' + err) });
+        .catch(err => {
+            console.log("Err value: " + JSON.stringify(err));
+            res.status(400).json('Error: ' + err)
+        });
 });
 
 module.exports = router;

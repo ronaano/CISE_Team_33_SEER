@@ -14,50 +14,15 @@ export default class CreateArticle extends Component {
             pages: "",
             month: ""
         };
-        this.onChangeAuthor = this.onChangeAuthor.bind(this);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeJournal = this.onChangeJournal.bind(this);
-        this.onChangeYear = this.onChangeYear.bind(this);
-        this.onChangeVolume = this.onChangeVolume.bind(this);
-        this.onChangeNumber = this.onChangeNumber.bind(this);
-        this.onChangePages = this.onChangePages.bind(this);
-        this.onChangeMonth = this.onChangeMonth.bind(this);
+        this.articleOnChange = this.articleOnChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onChangeAuthor(event) {
-        this.setState({ author: event.target.value });
+    articleOnChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
     }
 
-    onChangeTitle(event) {
-        this.setState({ title: event.target.value });
-    }
-
-    onChangeJournal(event) {
-        this.setState({ journal: event.target.value });
-    }
-
-    onChangeYear(event) {
-        this.setState({ year: event.target.value });
-    }
-
-    onChangeVolume(event) {
-        this.setState({ volume: event.target.value });
-    }
-
-    onChangeNumber(event) {
-        this.setState({ number: event.target.value });
-    }
-
-    onChangePages(event) {
-        this.setState({ pages: event.target.value });
-    }
-
-    onChangeMonth(event) {
-        this.setState({ month: event.target.value });
-    }
-
-    onSubmit(event) {
+    async onSubmit(event) {
         event.preventDefault();
         const article = {
             author: this.state.author,
@@ -70,61 +35,73 @@ export default class CreateArticle extends Component {
             month: this.state.month,
             status: "To be Moderated"
         }
-        axios.post('http://localhost:5000/articles/add', article)
+        await axios.post('http://localhost:5000/articles/add', article)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
 
+        window.location = "/mod"
     }
-
+    //Formgroup needs to know what state value it's changing! Passing the name and onChange function is easy.
+    // store a key?? for each one maybe, maybe dependent on the key we set it????
+    // the name of the field determines which state value we passing???
+    // 
     render() {
         return (
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                     <label>
                         Author:
-              <input value={this.state.author} onChange={this.onChangeAuthor} />
+              <input name="author" value={this.state.author}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Title:
-              <input value={this.state.title} onChange={this.onChangeTitle} />
+              <input name="title" value={this.state.title}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Journal:
-              <input value={this.state.journal} onChange={this.onChangeJournal} />
+              <input name="journal" value={this.state.journal}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Year:
-              <input value={this.state.year} onChange={this.onChangeYear} />
+              <input name="year" value={this.state.year}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Number:
-              <input value={this.state.number} onChange={this.onChangeNumber} />
+              <input name="number" value={this.state.number}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Volume:
-              <input value={this.state.volume} onChange={this.onChangeVolume} />
+              <input name="volume" value={this.state.volume}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Pages:
-              <input value={this.state.pages} onChange={this.onChangePages} />
+              <input name="pages" value={this.state.pages}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Month:
-              <input value={this.state.month} onChange={this.onChangeMonth} />
+              <input name="month" value={this.state.month}
+                            onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <input type="submit" value="Submit" />

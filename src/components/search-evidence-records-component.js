@@ -16,10 +16,20 @@ export default class SearchEvidenceRecords extends Component {
                 { key: 3, name: "Software Engineering Methodology", value: "SoftwareEngineeringMethodology" },
                 { key: 4, name: "Participants", value: "Participants" }],
             operators: ["contains", "does not contain", "begins with", "ends with", "is equal to"],
-            semethods: ["TDD", "BDD", "Pair Programming", "Planning Poker", "Daily Standup Meetings"],
             remethod: ["Case Study", "Field Observation", "Experiment", "Interview", "Survey"],
-            semethodology: ["Scrum", "Waterfall", "Spiral", "XP"],
             participants: ["Undergraduate Students", "Postgraduate Students", "Pracitioners"],
+            semethods: ["TDD", "BDD", "Pair Programming", "Planning Poker",
+                "Daily Standup Meetings", "Story Boards", "User Story Mapping",
+                "Continuous Integration", "Retrospectives", "Burn-down Charts",
+                "Requirements Prioritisation", "Version Control",
+                "Code Sharing"],
+            semethodology: ["Scrum", "Waterfall", "Spiral", "XP",
+                "Rational Unified Process", "Crystal", "Clean room",
+                "Feature Driven Development", "Model Driven Development",
+                "Domain Driven Development", "Formal methods",
+                "Problem Driven Development", "Cloud computing",
+                "Service Oriented Development", "Aspect Oriented Development",
+                "Values Driven Development", "Product Driven Development", "Agile"],
             logicoperators: ["AND", "OR"],
             results: []
         };
@@ -47,7 +57,6 @@ export default class SearchEvidenceRecords extends Component {
         } else if (select1Value === "Participants") {
             filterGroupsModified[id].select3dropdown = this.state.participants;
         }
-        //console.log(JSON.stringify(filterGroupsModified));
         this.setState({
             filterGroups: filterGroupsModified
         });
@@ -83,10 +92,17 @@ export default class SearchEvidenceRecords extends Component {
     addFilter = () => {
         let newFilterGroupID = this.state.counter;
         newFilterGroupID++;
-        let filterGroupsModified = [...this.state.filterGroups, { id: (newFilterGroupID), select1: "SoftwareEngineeringMethod", select2: "contains", select3: "TDD", select3dropdown: [], logicoperator: "", logicoperatordropdown: [] }];
-        filterGroupsModified[this.state.counter].logicoperatordropdown = this.state.logicoperators;
-        filterGroupsModified[this.state.counter].logicoperator = "AND";
-        filterGroupsModified[newFilterGroupID].select3dropdown = this.state.semethods;
+        let filterGroupsModified = [...this.state.filterGroups, {
+            id: (newFilterGroupID), select1: "SoftwareEngineeringMethod",
+            select2: "contains", select3: "TDD", select3dropdown: [],
+            logicoperator: "", logicoperatordropdown: []
+        }];
+        filterGroupsModified[this.state.counter].logicoperatordropdown
+            = this.state.logicoperators;
+        filterGroupsModified[this.state.counter].logicoperator
+            = "AND";
+        filterGroupsModified[newFilterGroupID].select3dropdown
+            = this.state.semethods;
         this.setState({
             counter: newFilterGroupID,
             filterGroups: filterGroupsModified
@@ -112,19 +128,19 @@ export default class SearchEvidenceRecords extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        axios.post("http://localhost:5000/evidencerecords/search", this.state.filterGroups).then((response) => {
-            console.log(JSON.stringify(response.data));
-            this.setState({
-                results: response.data
-            });
-        }).catch(err => console.log(err));
+        axios.post("http://localhost:5000/evidencerecords/search",
+            this.state.filterGroups).then((response) => {
+                console.log(JSON.stringify(response.data));
+                this.setState({
+                    results: response.data
+                });
+            }).catch(err => console.log(err));
     }
 
 
     render() {
         return (
             <form onSubmit={this.onSubmit}>
-                {/* <input value={this.state.search}>Description</input> */}
                 {this.state.filterGroups.map((filterGroup) => {
                     return (<FilterGroup
                         key={filterGroup.id}
@@ -155,7 +171,8 @@ export default class SearchEvidenceRecords extends Component {
                         <tr>
                             <th>Author</th>
                             <th>Title</th>
-                            <th>Date</th>
+                            <th>Month</th>
+                            <th>Year</th>
                             <th>Description</th>
                             <th>Outcome</th>
                             <th>Context</th>
@@ -165,17 +182,30 @@ export default class SearchEvidenceRecords extends Component {
                             <th>Software Engineering Methodology</th>
                         </tr>
                         {this.state.results.map((evidenceRecord) => {
-                            return (<tr key={evidenceRecord._id}>
-                                <td>{evidenceRecord.Author}</td>
-                                <td>{evidenceRecord.Title}</td>
-                                <td>{evidenceRecord.Date}</td>
-                                <td>{evidenceRecord.Description}</td>
-                                <td>{evidenceRecord.Outcome}</td>
-                                <td>{evidenceRecord.Context}</td>
-                                <td>{evidenceRecord.Result}</td>
-                                <td>{evidenceRecord.ResearchMethod}</td>
-                                <td>{evidenceRecord.SoftwareEngineeringMethod}</td>
-                                <td>{evidenceRecord.SoftwareEngineeringMethodology}</td>
+                            return (<tr key={evidenceRecord
+                                ._id}>
+                                <td>{evidenceRecord
+                                    .Author}</td>
+                                <td>{evidenceRecord
+                                    .Title}</td>
+                                <td>{evidenceRecord
+                                    .Month}</td>
+                                <td>{evidenceRecord
+                                    .Year}</td>
+                                <td>{evidenceRecord
+                                    .Description}</td>
+                                <td>{evidenceRecord
+                                    .Outcome}</td>
+                                <td>{evidenceRecord
+                                    .Context}</td>
+                                <td>{evidenceRecord
+                                    .Result}</td>
+                                <td>{evidenceRecord
+                                    .ResearchMethod}</td>
+                                <td>{evidenceRecord
+                                    .SoftwareEngineeringMethod}</td>
+                                <td>{evidenceRecord
+                                    .SoftwareEngineeringMethodology}</td>
                             </tr>)
                         })}
                     </tbody>

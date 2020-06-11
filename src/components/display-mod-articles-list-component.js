@@ -38,7 +38,8 @@ export default class ModDisplay extends Component {
 
     render() {
         return (
-            <Table type={true} submittedArticles={this.state.submittedArticles} articleState={this.changeArticlesState} />
+            <Table submittedArticles={this.state.submittedArticles}
+                articleState={this.changeArticlesState} />
         )
     }
 }

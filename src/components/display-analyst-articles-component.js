@@ -22,7 +22,7 @@ export default class AnalystDisplay extends Component {
 
     render() {
         return (
-            <Table type={false} submittedArticles={this.state.moderatedArticles} />
+            <Table submittedArticles={this.state.moderatedArticles} />
         )
     }
 }
