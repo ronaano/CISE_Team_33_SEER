@@ -10,6 +10,9 @@ export default function Navbar(props) {
                     <Link to="/" className="nav-link">Home</Link>
                 </li>
                 <li className="navbar-item">
+                    <Link to="/create" className="nav-link">Create an Article</Link>
+                </li>
+                <li className="navbar-item">
                     <Link to="/mod" className="nav-link">Moderated Articles</Link>
                 </li>
                 <li className="navbar-item">
