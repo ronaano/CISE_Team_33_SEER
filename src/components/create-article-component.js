@@ -35,7 +35,7 @@ export default class CreateArticle extends Component {
             month: this.state.month,
             status: "To be Moderated"
         }
-        await axios.post('http://localhost:5000/articles/add', article)
+        await axios.post('/articles/add', article)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
 
