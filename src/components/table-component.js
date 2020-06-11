@@ -12,7 +12,7 @@ const Article = props => (
         <td>{props.article.number}</td>
         <td>{props.article.pages}</td>
         <td>{props.article.month}</td>
-        <td>{(false ? (<div>
+        <td>{(props.typeofdisplay === "mod" ? (<div>
             <button
                 onClick={props.acceptArticle}>Accept</button>
             <button
@@ -72,7 +72,6 @@ export default class Table extends Component {
     }
 
     articlesList(submittedArticles) {
-        console.log(submittedArticles);
         return submittedArticles.map(
             currentarticle => {
                 return <Article type={this.props.type}
@@ -82,7 +81,7 @@ export default class Table extends Component {
                     acceptArticle={() => {
                         this.acceptArticle(currentarticle._id)
                     }}
-                    typeofdisplay={true}
+                    typeofdisplay={this.props.type}
                     article={currentarticle}
                     key={currentarticle._id}
                     _id={currentarticle._id} />;

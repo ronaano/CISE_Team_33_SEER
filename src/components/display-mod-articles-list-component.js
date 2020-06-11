@@ -20,25 +20,20 @@ export default class ModDisplay extends Component {
             .catch((err) => {
                 console.log(err);
             })
-        //console.log(this.state.submittedArticles);
     }
 
     changeArticlesState = (articleID) => {
         let newSubmittedArticles = [...this.state.submittedArticles];
-
         newSubmittedArticles.filter(function (article) { return (article._id !== articleID) });
-        console.log("Before setting state:" + newSubmittedArticles);
         this.setState(
             {
                 submittedArticles: newSubmittedArticles
             });
-
-
     }
 
     render() {
         return (
-            <Table submittedArticles={this.state.submittedArticles}
+            <Table type="mod" submittedArticles={this.state.submittedArticles}
                 articleState={this.changeArticlesState} />
         )
     }
