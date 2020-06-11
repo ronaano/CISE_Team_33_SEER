@@ -7,17 +7,42 @@ export default class SearchEvidenceRecords extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filterGroups: [{ id: 0, select1: "SoftwareEngineeringMethod", select2: "contains", select3: "TDD", logicoperator: "", logicoperatordropdown: [], select3dropdown: [] }],
+            filterGroups: [{
+                id: 0, select1: "SoftwareEngineeringMethod",
+                select2: "contains"
+                , select3: "TDD",
+                logicoperator: "", logicoperatordropdown: [],
+                select3dropdown: []
+            }],
             counter: 0,
             search: "",
             filters: [
-                { key: 1, name: "Software Engineering Method", value: "SoftwareEngineeringMethod" },
-                { key: 2, name: "Research Method", value: "ResearchMethod" },
-                { key: 3, name: "Software Engineering Methodology", value: "SoftwareEngineeringMethodology" },
-                { key: 4, name: "Participants", value: "Participants" }],
-            operators: ["contains", "does not contain", "begins with", "ends with", "is equal to"],
-            remethod: ["Case Study", "Field Observation", "Experiment", "Interview", "Survey"],
-            participants: ["Undergraduate Students", "Postgraduate Students", "Pracitioners"],
+                {
+                    key: 1, name: "Software Engineering Method",
+                    value: "SoftwareEngineeringMethod"
+                },
+                {
+                    key: 2, name: "Research Method",
+                    value: "ResearchMethod"
+                },
+                {
+                    key: 3, name: "Software Engineering Methodology",
+                    value: "SoftwareEngineeringMethodology"
+                },
+                {
+                    key: 4, name: "Participants",
+                    value: "Participants"
+                },
+                {
+                    key: 5, name: "Results",
+                    value: "Result"
+                }],
+            operators: ["contains", "does not contain", "begins with",
+                "ends with", "is equal to"],
+            remethod: ["Case Study", "Field Observation", "Experiment",
+                "Interview", "Survey"],
+            participants: ["Undergraduate Students", "Postgraduate Students",
+                "Pracitioners"],
             semethods: ["TDD", "BDD", "Pair Programming", "Planning Poker",
                 "Daily Standup Meetings", "Story Boards", "User Story Mapping",
                 "Continuous Integration", "Retrospectives", "Burn-down Charts",
@@ -29,7 +54,10 @@ export default class SearchEvidenceRecords extends Component {
                 "Domain Driven Development", "Formal methods",
                 "Problem Driven Development", "Cloud computing",
                 "Service Oriented Development", "Aspect Oriented Development",
-                "Values Driven Development", "Product Driven Development", "Agile"],
+                "Values Driven Development", "Product Driven Development",
+                "Agile"],
+            result: ["Supports the Benefit/Outcome",
+                "Does not Support the Benefit/Outcome"],
             logicoperators: ["AND", "OR"],
             results: []
         };
@@ -38,7 +66,8 @@ export default class SearchEvidenceRecords extends Component {
 
     componentDidMount() {
         let filterGroupsModified = [...this.state.filterGroups];
-        filterGroupsModified[this.state.counter].select3dropdown = this.state.semethods;
+        filterGroupsModified[this.state.counter].select3dropdown
+            = this.state.semethods;
         this.setState({
             filterGroups: filterGroupsModified
         })
@@ -56,6 +85,9 @@ export default class SearchEvidenceRecords extends Component {
             filterGroupsModified[id].select3dropdown = this.state.semethodology;
         } else if (select1Value === "Participants") {
             filterGroupsModified[id].select3dropdown = this.state.participants;
+        }
+        else if (select1Value === "Results") {
+            filterGroupsModified[id].select3dropdown = this.state.results;
         }
         this.setState({
             filterGroups: filterGroupsModified
@@ -128,7 +160,7 @@ export default class SearchEvidenceRecords extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        axios.post("http://localhost:5000/evidencerecords/search",
+        axios.post("/evidencerecords/search",
             this.state.filterGroups).then((response) => {
                 console.log(JSON.stringify(response.data));
                 this.setState({

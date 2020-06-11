@@ -13,7 +13,7 @@ export default class ModDisplay extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:5000/articles")
+        axios.get("/articles")
             .then(res => {
                 this.setState({ submittedArticles: res.data })
             })

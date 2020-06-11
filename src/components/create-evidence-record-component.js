@@ -44,7 +44,7 @@ export default class CreateEvidenceRecord extends Component {
 
 
     componentDidMount() {
-        axios.get('http://localhost:5000/moderatedarticles/' + this.props.match.params._id)
+        axios.get('/moderatedarticles/' + this.props.match.params._id)
             .then(res => {
                 this.setState({
                     author: res.data.author,
@@ -77,15 +77,15 @@ export default class CreateEvidenceRecord extends Component {
             SoftwareEngineeringMethod: this.state.semethodValue,
             SoftwareEngineeringMethodology: this.state.semethodologyValue
         };
-        await axios.post('http://localhost:5000/evidencerecords/add'
+        await axios.post('/evidencerecords/add'
             , evidencerecord)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
 
-        // axios.delete('http://localhost:5000/moderatedarticles/'
-        //     + this.props.match.params._id)
-        //     .then(res => console.log(res.data))
-        //     .catch(err => console.log(err));
+        axios.delete('/moderatedarticles/'
+            + this.props.match.params._id)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
     }
 
     render() {

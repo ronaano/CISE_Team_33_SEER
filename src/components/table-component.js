@@ -32,18 +32,18 @@ export default class Table extends Component {
     }
 
     async acceptArticle(articleID) {
-        await axios.get("http://localhost:5000/articles/" + articleID)
+        await axios.get("/articles/" + articleID)
             .then(res => {
                 this.setState({
                     articleSelected: res.data
                 });
             });
 
-        axios.post("http://localhost:5000/moderatedarticles/add/",
+        axios.post("/moderatedarticles/add/",
             this.state.articleSelected)
             .then(res => console.log(res.data));
 
-        axios.delete("http://localhost:5000/articles/" + articleID)
+        axios.delete("/articles/" + articleID)
             .then(res => console.log(res.data));
 
         this.props.articleState(articleID);
@@ -52,19 +52,18 @@ export default class Table extends Component {
     }
 
     async rejectArticle(articleID) {
-        console.log("reject check");
-        await axios.get("http://localhost:5000/articles/" + articleID)
+        await axios.get("/articles/" + articleID)
             .then(res => {
                 this.setState({
                     articleSelected: res.data
                 });
             });
 
-        axios.post("http://localhost:5000/rejectedarticles/add/",
+        axios.post("/rejectedarticles/add/",
             this.state.articleSelected)
             .then(res => console.log(res.data));
 
-        axios.delete("http://localhost:5000/articles/" + articleID)
+        axios.delete("/articles/" + articleID)
             .then(res => console.log(res.data));
 
         this.props.articleState(articleID);

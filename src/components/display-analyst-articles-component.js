@@ -11,7 +11,7 @@ export default class AnalystDisplay extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:5000/moderatedarticles")
+        axios.get("/moderatedarticles")
             .then(res => {
                 this.setState({ moderatedArticles: res.data })
             })
