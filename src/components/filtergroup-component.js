@@ -12,7 +12,7 @@ export default function FilterGroup(props) {
             )}
         </select>
         <select value={props.selected2}
-            onChange={(event) => { props.select2Change(event, props.id) }} >
+            onChange={(event) => { props.select2Change(event, props.id) }}>
             <option defaultValue="" disabled>Please Choose</option>
             {props.select2.map(options => {
                 return <option key={options} value={options}>
@@ -29,7 +29,7 @@ export default function FilterGroup(props) {
             })}
         </select>
         <select value={props.logicoperator}
-            onChange={(event) => { props.logicChange(event, props.id) }} >
+            onChange={(event) => { props.logicChange(event, props.id) }}>
             <option defaultValue="" disabled>Please Choose</option>
             {props.logic.map(options => {
                 return <option key={options} value={options}>

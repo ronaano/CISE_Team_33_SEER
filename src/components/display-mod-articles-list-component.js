@@ -24,7 +24,9 @@ export default class ModDisplay extends Component {
 
     changeArticlesState = (articleID) => {
         let newSubmittedArticles = [...this.state.submittedArticles];
-        newSubmittedArticles.filter(function (article) { return (article._id !== articleID) });
+        newSubmittedArticles.filter(function (article) {
+            return (article._id !== articleID)
+        });
         this.setState(
             {
                 submittedArticles: newSubmittedArticles
