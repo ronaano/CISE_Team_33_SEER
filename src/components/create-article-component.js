@@ -81,7 +81,7 @@ export default class CreateArticle extends Component {
                 <div className="form-group">
                     <label>
                         Number:
-              <input name="number" placeholder="Ex: 2011" value={this.state.number}
+              <input name="number" placeholder="Ex: 1" value={this.state.number}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
