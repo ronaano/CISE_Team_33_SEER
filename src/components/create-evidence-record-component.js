@@ -95,6 +95,7 @@ export default class CreateEvidenceRecord extends Component {
                     <label>
                         Author:
               <input name="author"
+                            placeholder="Ex: John Appleseed"
                             value={this.state.author}
                             onChange={this.handleFormEvent} />
                     </label>
@@ -103,6 +104,7 @@ export default class CreateEvidenceRecord extends Component {
                     <label>
                         Title:
                 <input name="title"
+                            placeholder="Ex: Test Driven Development"
                             value={this.state.title}
                             onChange={this.handleFormEvent} />
                     </label>
@@ -111,6 +113,7 @@ export default class CreateEvidenceRecord extends Component {
                     <label>
                         Month:
                 <input name="month"
+                            placeholder="Ex: dec(For December)"
                             value={this.state.month}
                             onChange={this.handleFormEvent} />
                     </label>
@@ -119,6 +122,7 @@ export default class CreateEvidenceRecord extends Component {
                     <label>
                         Year:
                 <input name="year"
+                            placeholder="Ex: 2011"
                             value={this.state.year}
                             onChange={this.handleFormEvent} />
                     </label>
@@ -127,6 +131,7 @@ export default class CreateEvidenceRecord extends Component {
                     <label>
                         Description:
               <input name="description"
+                            placeholder="Describe the evidence"
                             value={this.state.description}
                             onChange={this.handleFormEvent} />
                     </label>
@@ -135,6 +140,8 @@ export default class CreateEvidenceRecord extends Component {
                     <label>
                         Context:
               <input name="context"
+                            placeholder="When was the evidence taken
+                            , who took it etc."
                             value={this.state.context}
                             onChange={this.handleFormEvent} />
                     </label>
@@ -143,6 +150,7 @@ export default class CreateEvidenceRecord extends Component {
                     <label>
                         Outcome:
               <input name="outcome"
+                            placeholder="Outcome of this under test"
                             value={this.state.outcome}
                             onChange={this.handleFormEvent} />
                     </label>

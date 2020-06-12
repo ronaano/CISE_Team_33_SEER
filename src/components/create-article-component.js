@@ -51,56 +51,58 @@ export default class CreateArticle extends Component {
                 <div className="form-group">
                     <label>
                         Author:
-              <input name="author" value={this.state.author}
+              <input name="author" placeholder="Ex: John Appleseed"
+                            value={this.state.author}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Title:
-              <input name="title" value={this.state.title}
+              <input name="title" placeholder="Ex: Test Driven Development"
+                            value={this.state.title}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Journal:
-              <input name="journal" value={this.state.journal}
+              <input name="journal" placeholder="Ex: Software Engineering" value={this.state.journal}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Year:
-              <input name="year" value={this.state.year}
+              <input name="year" placeholder="Ex: 2011" value={this.state.year}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Number:
-              <input name="number" value={this.state.number}
+              <input name="number" placeholder="Ex: 2011" value={this.state.number}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Volume:
-              <input name="volume" value={this.state.volume}
+              <input name="volume" placeholder="Ex: (Volume) 14" value={this.state.volume}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Pages:
-              <input name="pages" value={this.state.pages}
+              <input name="pages" placeholder="Ex: 11-15" value={this.state.pages}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
                 <div className="form-group">
                     <label>
                         Month:
-              <input name="month" value={this.state.month}
+              <input name="month" placeholder="Ex: dec(For December)" value={this.state.month}
                             onChange={this.articleOnChange} />
                     </label>
                 </div>
