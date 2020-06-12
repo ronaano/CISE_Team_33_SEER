@@ -36,10 +36,24 @@ router.route('/add').post((req, res) => {
 
     newModeratedArticle.save()
         .then(() => res.json('Moderated article added!'))
-        .catch(err => { console.log("Err value: " + JSON.stringify(err)); res.status(400).json('Error: ' + err) });
+        .catch(err => {
+            console.log("Err value: " + JSON.stringify(err));
+            res.status(400).json('Error: ' + err)
+        });
 });
 
-function name() {
+router.route('/:_id').get((req, res) => {
+    const id = req.params._id;
+    ModeratedArticle.findById(id)
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+router.route('/:_id').delete((req, res) => {
+    const id = req.params._id;
+    ModeratedArticle.findByIdAndDelete(id)
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
 
-}
+
 module.exports = router;

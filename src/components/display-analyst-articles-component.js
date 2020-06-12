@@ -11,7 +11,7 @@ export default class AnalystDisplay extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:5000/moderatedarticles")
+        axios.get("/moderatedarticles")
             .then(res => {
                 this.setState({ moderatedArticles: res.data })
             })
@@ -22,7 +22,8 @@ export default class AnalystDisplay extends Component {
 
     render() {
         return (
-            <Table type={false} submittedArticles={this.state.moderatedArticles} />
+            <Table type="analyst"
+                submittedArticles={this.state.moderatedArticles} />
         )
     }
 }

@@ -7,6 +7,40 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/add').post((req, res) => {
+    const Author = req.body.Author;
+    const Title = req.body.Title;
+    const Month = req.body.Month;
+    const Year = req.body.Year;
+    const Description = req.body.Description;
+    const Rating = req.body.Rating;
+    const Participants = req.body.Participants;
+    const Outcome = req.body.Outcome;
+    const Context = req.body.Context;
+    const Result = req.body.Result;
+    const ResearchMethod = req.body.ResearchMethod;
+    const SoftwareEngineeringMethod = req.body.SoftwareEngineeringMethod;
+    const SoftwareEngineeringMethodology =
+        req.body.SoftwareEngineeringMethodology;
+    const newEvidenceRecord = new EvidenceRecord({
+        Author,
+        Title,
+        Month,
+        Year,
+        Description,
+        Rating,
+        Participants,
+        Outcome,
+        Context,
+        Result,
+        ResearchMethod,
+        SoftwareEngineeringMethod,
+        SoftwareEngineeringMethodology
+    });
+    newEvidenceRecord.save().then(() => res.json("Evidence Record added!"))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/search').post((req, res) => {
     let filterGroups = req.body;
     let query = { $and: [], $or: [] };
@@ -19,7 +53,8 @@ router.route('/search').post((req, res) => {
         let select2 = filterGroups[i].select2;
         let select3 = filterGroups[i].select3;
         if (i === (filterGroups.length - 1) && filterGroups.length > 1) {
-            filterGroups[i].logicoperator = filterGroups[(filterGroups.length - 2)].logicoperator;
+            filterGroups[i].logicoperator =
+                filterGroups[(filterGroups.length - 2)].logicoperator;
         } switch (select2) {
             case 'is equal to': {
                 queryObject[select1] = select3;

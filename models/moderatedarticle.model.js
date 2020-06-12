@@ -52,6 +52,7 @@ const moderatedArticleSchema = new Schema({
 });
 
 
-const ModeratedArticle = mongoose.model('ModeratedArticle', moderatedArticleSchema);
+const ModeratedArticle = mongoose.model('ModeratedArticle',
+    moderatedArticleSchema);
 
 module.exports = ModeratedArticle;
