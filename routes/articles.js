@@ -24,7 +24,6 @@ router.route('/:_id').delete((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
-    // console.log("Request: " + JSON.stringify(req.body));
     const author = req.body.author;
     const title = req.body.title;
     const journal = req.body.journal;
@@ -46,7 +45,7 @@ router.route('/add').post((req, res) => {
         month,
         status
     });
-    // console.log("New Article" + JSON.stringify(newArticle));
+
     newArticle.save()
         .then(() => res.json('Article added!'))
         .catch(err => {
