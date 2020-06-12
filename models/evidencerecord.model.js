@@ -34,8 +34,7 @@ const evidenceRecordSchema = new Schema({
     },
     Outcome: {
         type: String,
-        trim: true,
-        reqiured: true
+        trim: true
     },
     Context: {
         type: String,
